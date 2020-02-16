@@ -18,7 +18,6 @@ const App: React.FunctionComponent = (): JSX.Element => {
       .then(res => res.json())
       .then(
         result => {
-          console.log(result.articles); //TODO: remove
           setArticles(result.articles);
           setIsLoaded(true);
         },
@@ -34,7 +33,7 @@ const App: React.FunctionComponent = (): JSX.Element => {
     <div className='App'>
       <Container>
         <Header />
-        <Articles />
+        {isLoaded && <Articles articles={articles} />}
       </Container>
     </div>
   );
