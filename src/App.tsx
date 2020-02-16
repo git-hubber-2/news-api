@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import Articles from './components/Articles';
 
 import Header from './components/Header';
 
@@ -9,6 +10,7 @@ function App() {
     <div className='App'>
       <Container>
         <Header />
+        <Articles />
       </Container>
     </div>
   );
