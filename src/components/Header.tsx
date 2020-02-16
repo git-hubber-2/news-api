@@ -4,7 +4,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
-const Header: React.FunctionComponent = (): JSX.Element => {
+type HeaderProps = {
+  setFilter: (value: string) => void;
+};
+
+const Header: React.FunctionComponent<HeaderProps> = ({
+  setFilter,
+}): JSX.Element => {
   return (
     <Navbar bg='light' expand='lg'>
       <Navbar.Brand href='#home'>News API</Navbar.Brand>
@@ -16,7 +22,7 @@ const Header: React.FunctionComponent = (): JSX.Element => {
           placeholder='Filter Source'
           className='mr-sm-2'
           onChange={(x: React.FormEvent<FormControl & HTMLInputElement>) => {
-            // do something here
+            setFilter(x.currentTarget.value);
           }}
         />
         <Form.Text className='text-muted'>eg: techcrunch</Form.Text>

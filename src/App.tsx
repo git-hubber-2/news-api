@@ -12,7 +12,9 @@ const App: React.FunctionComponent = (): JSX.Element => {
 
   React.useEffect(() => {
     const apiKey = '96e7efbae84544aca2e40f5834bf2777';
-    const url = `http://newsapi.org/v2/top-headlines?country=au&apiKey=${apiKey}`;
+    const url = filter
+      ? `http://newsapi.org/v2/top-headlines?sources=${filter}&apiKey=${apiKey}`
+      : `http://newsapi.org/v2/top-headlines?country=au&apiKey=${apiKey}`;
 
     fetch(url)
       .then(res => res.json())
@@ -27,13 +29,24 @@ const App: React.FunctionComponent = (): JSX.Element => {
           setIsLoaded(false);
         }
       );
-  }, []);
+  }, [filter]);
 
   return (
     <div className='App'>
       <Container>
-        <Header />
-        {isLoaded && <Articles articles={articles} />}
+        <Header setFilter={setFilter} />
+        {isLoaded &&
+          (articles.length > 0 ? (
+            <Articles articles={articles} />
+          ) : (
+            <>
+              <h3>Nothing to see here...</h3>
+              <p>
+                Try changing the source filter (eg: techcrunch, abc-news-au,
+                abc-news etc)
+              </p>
+            </>
+          ))}
       </Container>
     </div>
   );
